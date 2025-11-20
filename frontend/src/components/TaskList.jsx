@@ -1,52 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import taskService from '../services/taskService';
+import React from 'react';
 import TaskItem from './TaskItem';
-import TaskForm from './TaskForm';
 
-const TaskList = () => {
-  const [tasks, setTasks] = useState([]);
-  const [editingTask, setEditingTask] = useState(null);
+const TaskList = ({ tasks, onEdit, onDelete }) => {
+  const statuses = ['To Do', 'In Progress', 'Completed']; // Assuming these are the possible statuses
 
-  useEffect(() => {
-    fetchTasks();
-  }, []);
-
-  const fetchTasks = async () => {
-    const data = await taskService.getTasks();
-    setTasks(data);
-  };
-
-  const addTask = async (taskData) => {
-    await taskService.createTask(taskData);
-    fetchTasks();
-  };
-
-  const updateTask = async (id, taskData) => {
-    await taskService.updateTask(id, taskData);
-    fetchTasks();
-  };
-
-  const deleteTask = async (id) => {
-    await taskService.deleteTask(id);
-    fetchTasks();
+  const getTasksByStatus = (status) => {
+    return tasks.filter((task) => task.status === status);
   };
 
   return (
-    <div>
-      <TaskForm
-        addTask={addTask}
-        updateTask={updateTask}
-        editingTask={editingTask}
-        setEditingTask={setEditingTask}
-      />
-      <h2>Tasks</h2>
-      {tasks.map((task) => (
-        <TaskItem
-          key={task._id}
-          task={task}
-          onDelete={deleteTask}
-          onEdit={setEditingTask}
-        />
+    <div className="task-list-container">
+      {statuses.map((status) => (
+        <div key={status} className="task-column">
+          <h2>{status}</h2>
+          {getTasksByStatus(status).map((task) => (
+            <TaskItem
+              key={task._id}
+              task={task}
+              onDelete={onDelete}
+              onEdit={onEdit}
+            />
+          ))}
+        </div>
       ))}
     </div>
   );
