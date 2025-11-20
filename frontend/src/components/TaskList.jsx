@@ -2,7 +2,7 @@ import React from 'react';
 import TaskItem from './TaskItem';
 
 const TaskList = ({ tasks, onEdit, onDelete }) => {
-  const statuses = ['To Do', 'In Progress', 'Completed']; // Assuming these are the possible statuses
+  const statuses = ['To Do', 'In Progress', 'Completed']; 
 
   const getTasksByStatus = (status) => {
     return tasks.filter((task) => task.status === status);

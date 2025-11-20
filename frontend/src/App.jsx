@@ -20,14 +20,14 @@ function App() {
   const handleAddTask = async (taskData) => {
     await taskService.createTask(taskData);
     fetchTasks();
-    setShowTaskForm(false); // Hide form after adding
+    setShowTaskForm(false); 
   };
 
   const handleUpdateTask = async (id, taskData) => {
     await taskService.updateTask(id, taskData);
     fetchTasks();
-    setEditingTask(null); // Clear editing task
-    setShowTaskForm(false); // Hide form after updating
+    setEditingTask(null);
+    setShowTaskForm(false);
   };
 
   const handleDeleteTask = async (id) => {
@@ -37,11 +37,11 @@ function App() {
 
   const handleEditTask = (task) => {
     setEditingTask(task);
-    setShowTaskForm(true); // Show form when editing
+    setShowTaskForm(true);
   };
 
   const handleShowForm = () => {
-    setEditingTask(null); // Clear editing task when showing form for new task
+    setEditingTask(null);
     setShowTaskForm(true);
   };
 

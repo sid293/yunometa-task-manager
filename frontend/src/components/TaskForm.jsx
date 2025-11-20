@@ -35,7 +35,7 @@ const TaskForm = ({ addTask, updateTask, editingTask, setEditingTask, onClose })
     setDescription('');
     setStatus('To Do');
     setEditingTask(null);
-    onClose(); // Close the form after submission
+    onClose(); 
   };
 
   return (
